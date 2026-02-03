@@ -443,7 +443,8 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v18.2.0</nodeVersion>
+<!--                            <nodeVersion>v18.2.0</nodeVersion>-->
+                            <nodeVersion>v20.10.0</nodeVersion>
                         </configuration>
                     </execution>
 
