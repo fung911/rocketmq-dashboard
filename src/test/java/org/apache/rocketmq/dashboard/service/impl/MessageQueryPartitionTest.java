@@ -58,40 +58,6 @@ import static org.mockito.Mockito.when;
  * for a given topic.
  * It is used for message tracking, problem troubleshooting, and business
  * verification.
- * 
- * Partitioning Scheme Design (Equivalence Partitioning + Boundary Value
- * Analysis):
- * 
- * 1. Topic Existence Partitions:
- * - P1: Existing Topic - Topic name has been created in RocketMQ cluster
- * - P2: Non-existent Topic - Topic name does not exist in the cluster
- * - P3: Empty Topic Name - Topic name is null or empty string (Boundary)
- * 
- * 2. Time Range Validity Partitions:
- * - P4: Valid Time Range - begin < end, both are positive timestamps
- * - P5: Invalid Time Range - begin >= end, logically invalid (Boundary: begin =
- * end)
- * - P6: Negative Timestamp - begin < 0 or end < 0, illegal values (Boundary:
- * value < 0)
- * 
- * 3. Messages in Time Range Partitions:
- * - P7: With Messages - Messages exist in the specified time range
- * - P8: Without Messages - No messages in the specified time range
- * - P9: Partial Messages on Boundary - Message timestamps exactly on begin or
- * end (Boundary)
- * 
- * Representative Values Selected:
- * - Existing topic: "topic_test"
- * - Non-existent topic: "non_existent_topic"
- * - Empty topic: null, ""
- * - Valid time range: begin = 1000000000000L, end = 1000000100000L (begin <
- * end)
- * - Invalid time range: begin = 1000000100000L, end = 1000000000000L (begin >
- * end)
- * - Equal time range: begin = 1000000000000L, end = 1000000000000L (begin ==
- * end)
- * - Negative timestamps: begin = -1L or end = -1L
- * - Message timestamp on boundary: timestamp = begin or timestamp = end
  */
 public class MessageQueryPartitionTest {
 
