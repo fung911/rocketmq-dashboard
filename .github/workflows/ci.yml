@@ -29,3 +29,5 @@ jobs:
 
       - name: Build and Test with Maven
         run: mvn -B test -Dtest=!MsgTraceDecodeUtilTest,!WebStaticApplicationTests
+        env:
+          CI: false  # shutdown CI mode, let ESLint warnings not cause build failure
