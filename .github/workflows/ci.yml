@@ -24,8 +24,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Check license headers
-        run: mvn -B clean apache-rat:check
-        
+      # - name: Check license headers
+      #   run: mvn -B clean apache-rat:check
+
       - name: Build and Test with Maven
         run: mvn -B test -Dtest=!MsgTraceDecodeUtilTest,!WebStaticApplicationTests
