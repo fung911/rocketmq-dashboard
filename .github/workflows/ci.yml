@@ -1,0 +1,31 @@
+name: CI Build
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  # pull_request:
+  #   branches: [ "master", "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [ '17' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Check license headers
+        run: mvn -B clean apache-rat:check
+        
+      - name: Build and Test with Maven
+        run: mvn -B test -Dtest=!MsgTraceDecodeUtilTest,!WebStaticApplicationTests
