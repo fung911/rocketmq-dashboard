@@ -113,7 +113,7 @@ public class PermissionAspectTest extends BaseTest {
         when(configure.getRocketMqDashboardDataPath()).thenReturn("/tmp/rocketmq-console/test/data");
         Map<String, Map<String, List<String>>> rolePermsMap = new HashMap<>();
         Map<String, List<String>> rolePerms = new HashMap<>();
-        List<String> accessUrls = Lists.asList("/topic/route.query", new String[]{"/topic/stats.query"});
+        List<String> accessUrls = Lists.asList("/topic/route.query", new String[] { "/topic/stats.query" });
         rolePerms.put("admin", accessUrls);
         rolePermsMap.put("rolePerms", rolePerms);
         File file = createTestFile(rolePermsMap);
@@ -130,6 +130,7 @@ public class PermissionAspectTest extends BaseTest {
     private File createTestFile(Map map) throws Exception {
         String fileName = "/tmp/rocketmq-console/test/data/role-permission.yml";
         File file = new File(fileName);
+        file.getParentFile().mkdirs();
         file.delete();
         file.createNewFile();
         Files.write(JsonUtil.obj2String(map).getBytes(), file);
